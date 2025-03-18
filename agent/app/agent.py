@@ -10,6 +10,7 @@ from livekit.agents import (
 from livekit.agents.pipeline import VoicePipelineAgent
 from livekit.plugins import cartesia, deepgram, silero, turn_detector, google
 
+from app import services
 from app import prompts
 
 
@@ -38,9 +39,10 @@ async def entrypoint(ctx: JobContext):
         llm=google.LLM(model="gemini-2.0-pro-exp-02-05"),
         tts=cartesia.TTS(),
         turn_detector=turn_detector.EOUModel(),
-        min_endpointing_delay=0.5,
+        min_endpointing_delay=1.5,
         max_endpointing_delay=5.0,
         chat_ctx=initial_ctx,
+        before_tts_cb=services.validate_llm_output_length,
     )
 
     usage_collector = metrics.UsageCollector()
