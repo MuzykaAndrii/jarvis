@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from typing import AsyncIterable
 
 from livekit.agents.pipeline import VoicePipelineAgent
@@ -9,6 +10,8 @@ from google.genai.errors import ClientError as GeminiError
 from app.prompts import FALLBACK_MESSAGES
 from app.client import APIClient
 from app.backend import validate_endpoint, base_url
+
+logger = logging.getLogger("voice-agent")
 
 
 async def validate_llm_output_length(
@@ -25,19 +28,19 @@ async def validate_llm_output_length(
             text = "".join(chunks)
 
         except APIConnectionError as e:
-            print(f"LLM API connection error: {e}")
+            logger.warning(f"LLM API connection error: {e}")
             return FALLBACK_MESSAGES["llm_error"]
 
         except GeminiError as e:
-            print(f"LLM API processing error: {e}")
+            logger.warning(f"LLM API processing error: {e}")
             return FALLBACK_MESSAGES["llm_processing_error"]
 
         except asyncio.TimeoutError:
-            print("Timeout while collecting LLM output chunks")
+            logger.warning("Timeout while collecting LLM output chunks")
             return FALLBACK_MESSAGES["timeout"]
 
         except Exception as e:
-            print(f"Unexpected error processing LLM output: {e}")
+            logger.exception(f"Unexpected error processing LLM output: {e}")
             return FALLBACK_MESSAGES["backend_error"]
 
     try:

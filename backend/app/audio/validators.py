@@ -9,14 +9,8 @@ logger = logging.getLogger(__name__)
 def validate_expected_audio_length(text: str) -> str:
     """
     Validates and truncates text to ensure it doesn't exceed the maximum allowed audio duration.
-
-    Args:
-        text: The input text to validate
-
-    Returns:
-        The validated text, truncated if necessary
     """
-    print(f"Input text: {text}")
+    logger.info(f"Input text: {text}")
 
     if not text or not text.strip():
         return text
@@ -27,7 +21,7 @@ def validate_expected_audio_length(text: str) -> str:
         total_words / WORDS_PER_MIN
     ) * 60  # Convert minutes to seconds
 
-    print(
+    logger.info(
         f"Estimated duration: {estimated_duration:.2f}s, max duration: {MAX_DURATION_SECONDS}s, word count: {total_words}"
     )
 
@@ -39,10 +33,10 @@ def validate_expected_audio_length(text: str) -> str:
         if max_words > 3:
             truncated_text = truncated_text.rstrip(".!?,;") + "..."
 
-        print(
+        logger.info(
             f"Text truncated from {total_words} to {max_words} words to fit {MAX_DURATION_SECONDS}s limit"
         )
-        print(f"Output text: {truncated_text}")
+        logger.info(f"Output text: {truncated_text}")
         return truncated_text
 
     return text
