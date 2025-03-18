@@ -11,7 +11,7 @@ from livekit.agents import (
     metrics,
 )
 from livekit.agents.pipeline import VoicePipelineAgent
-from livekit.plugins import cartesia, openai, deepgram, silero, turn_detector
+from livekit.plugins import cartesia, deepgram, silero, turn_detector, google
 
 
 load_dotenv(dotenv_path=".env.local")
@@ -46,7 +46,7 @@ async def entrypoint(ctx: JobContext):
     agent = VoicePipelineAgent(
         vad=ctx.proc.userdata["vad"],
         stt=deepgram.STT(),
-        llm=openai.LLM(model="gpt-4o-mini"),
+        llm=google.LLM(model="gemini-2.0-pro-exp-02-05"),
         tts=cartesia.TTS(),
         turn_detector=turn_detector.EOUModel(),
         # minimum delay for endpointing, used when turn detector believes the user is done with their turn
