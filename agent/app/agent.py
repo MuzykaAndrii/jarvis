@@ -1,6 +1,5 @@
 import logging
 
-from dotenv import load_dotenv
 from livekit.agents import (
     AutoSubscribe,
     JobContext,
@@ -11,10 +10,9 @@ from livekit.agents import (
 from livekit.agents.pipeline import VoicePipelineAgent
 from livekit.plugins import cartesia, deepgram, silero, turn_detector, google
 
-import prompts
+from app import prompts
 
 
-load_dotenv(dotenv_path=".env.local")
 logger = logging.getLogger("voice-agent")
 
 
