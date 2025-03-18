@@ -1,6 +1,11 @@
+import logging
+
 from flask import Flask
 
 from app.audio.routes import router as audio_router
+
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def create_app() -> Flask:
