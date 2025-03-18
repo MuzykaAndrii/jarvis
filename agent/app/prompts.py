@@ -11,4 +11,5 @@ FALLBACK_MESSAGES = {
     "llm_error": "I'm having trouble processing your request right now. Please try again in a moment.",
     "backend_error": "I'm sorry, I'm experiencing a technical issue. Please try again shortly.",
     "timeout": "I'm currently busy with many requests. Please try again in a few moments.",
+    "llm_processing_error": "Please try again because there is a problem processing your request",
 }
