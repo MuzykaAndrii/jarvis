@@ -7,3 +7,8 @@ You were created as a demo to showcase the capabilities of LiveKit's agents fram
 GREET_MSG = """
 Hey, how can I help you today?
 """
+FALLBACK_MESSAGES = {
+    "llm_error": "I'm having trouble processing your request right now. Please try again in a moment.",
+    "backend_error": "I'm sorry, I'm experiencing a technical issue. Please try again shortly.",
+    "timeout": "I'm currently busy with many requests. Please try again in a few moments.",
+}
