@@ -1,13 +1,48 @@
+import logging
+
 from app.audio.config import MAX_DURATION_SECONDS, WORDS_PER_MIN
 
 
+logger = logging.getLogger(__name__)
+
+
 def validate_expected_audio_length(text: str) -> str:
+    """
+    Validates and truncates text to ensure it doesn't exceed the maximum allowed audio duration.
+
+    Args:
+        text: The input text to validate
+
+    Returns:
+        The validated text, truncated if necessary
+    """
+    print(f"Input text: {text}")
+
+    if not text or not text.strip():
+        return text
+
     words = text.split()
-    estimated_duration = (len(words) / WORDS_PER_MIN) * 60  # Convert minutes to seconds
+    total_words = len(words)
+    estimated_duration = (
+        total_words / WORDS_PER_MIN
+    ) * 60  # Convert minutes to seconds
+
+    print(
+        f"Estimated duration: {estimated_duration:.2f}s, max duration: {MAX_DURATION_SECONDS}s, word count: {total_words}"
+    )
+
+    max_words = int((MAX_DURATION_SECONDS / 60) * WORDS_PER_MIN)
 
     if estimated_duration > MAX_DURATION_SECONDS:
-        midpoint = len(words) // 2
-        trim_range = WORDS_PER_MIN // 2
-        text = " ".join(words[midpoint - trim_range : midpoint + trim_range])
+        truncated_text = " ".join(words[:max_words])
+
+        if max_words > 3:
+            truncated_text = truncated_text.rstrip(".!?,;") + "..."
+
+        print(
+            f"Text truncated from {total_words} to {max_words} words to fit {MAX_DURATION_SECONDS}s limit"
+        )
+        print(f"Output text: {truncated_text}")
+        return truncated_text
 
     return text
