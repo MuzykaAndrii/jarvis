@@ -1,0 +1,49 @@
+version: "3.9"
+
+x-environment: &environment
+  GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+  CARTESIA_API_KEY: ${CARTESIA_API_KEY}
+  DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY}
+  LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
+  LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
+  LIVEKIT_URL: ${LIVEKIT_URL}
+
+
+services:
+  agent:
+    container_name: chi-jarvis-agent
+    build:
+      context: ./agent
+    ports:
+      - "7880:7880"
+    volumes:
+      - ./agent:/home/appuser
+    depends_on:
+      - backend
+    environment:
+      <<: *environment
+
+  backend:
+    container_name: chi-jarvis-backend
+    build:
+      context: ./backend
+    user: "1001"
+    volumes:
+      - ./backend:/application
+    environment:
+      - FLASK_APP=app.main
+      - FLASK_ENV=development
+    ports:
+      - "5000:5000"
+
+  frontend:
+    container_name: chi-jarvis-frontend
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: ["dev"]

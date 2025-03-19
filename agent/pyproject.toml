@@ -8,7 +8,6 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.11"
 livekit-agents = "^0.12.17"
-python-dotenv = "^1.0.1"
 livekit-plugins-google = "^0.11.1"
 livekit-plugins-cartesia = "^0.4.11"
 livekit-plugins-deepgram = "^0.7.1"

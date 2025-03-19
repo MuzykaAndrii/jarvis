@@ -1,10 +1,6 @@
 from livekit.agents import WorkerOptions, cli
-from dotenv import load_dotenv
 
 from app.agent import entrypoint, prewarm
-
-
-load_dotenv(dotenv_path=".env.local")
 
 
 if __name__ == "__main__":
