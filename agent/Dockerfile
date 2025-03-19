@@ -41,7 +41,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 WORKDIR $WORKDIR
 COPY . $WORKDIR
 
-RUN python main.py download-files
+# RUN python main.py download-files
 
 USER $USER
 
