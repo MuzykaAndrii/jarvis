@@ -48,5 +48,7 @@ async def validate_llm_output_length(
         validated_text = response.get("text", text)
     except ClientError:
         return text
+    finally:
+        await backend_client.session.close()
 
     return validated_text
