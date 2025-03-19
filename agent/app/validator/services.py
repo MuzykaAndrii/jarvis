@@ -8,8 +8,8 @@ from livekit.agents._exceptions import APIConnectionError
 from google.genai.errors import ClientError as GeminiError
 
 from app.prompts import FALLBACK_MESSAGES
-from app.client import APIClient
-from app.backend import validate_endpoint, base_url
+from app.common.client import APIClient
+from app.validator.endpoints import validate_endpoint, base_url
 
 logger = logging.getLogger("voice-agent")
 

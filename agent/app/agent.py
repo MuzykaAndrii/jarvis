@@ -12,7 +12,7 @@ from livekit.agents.pipeline import VoicePipelineAgent
 # from livekit.plugins import cartesia, deepgram, silero, turn_detector, google
 from livekit.plugins import cartesia, deepgram, silero, google
 
-from app import services
+from agent.app.validator import services
 from app import prompts
 
 
