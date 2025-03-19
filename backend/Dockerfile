@@ -43,4 +43,4 @@ WORKDIR $WORKDIR
 COPY . $WORKDIR
 
 USER $USER
-CMD ["flask", "--app", "app.main", "run", "--debug"]
+CMD ["flask", "--app", "app.main", "run", "-p 5000", "--host=0.0.0.0", "--debug"]

@@ -20,11 +20,12 @@ services:
     ports:
       - "7880:7880"
     volumes:
-      - ./agent:/home/appuser
+      - ./agent/app:/application/app
     depends_on:
       - backend
     environment:
       <<: [*agent-environment, *livekit-environment]
+      BACKEND_URL: "http://backend:5000/" 
 
   backend:
     container_name: chi-jarvis-backend
