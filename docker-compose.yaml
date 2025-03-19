@@ -1,9 +1,12 @@
 version: "3.9"
 
-x-environment: &environment
+x-agent-envs: &agent-environment
   GOOGLE_API_KEY: ${GOOGLE_API_KEY}
   CARTESIA_API_KEY: ${CARTESIA_API_KEY}
   DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY}
+
+
+x-livekit-envs: &livekit-environment
   LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
   LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
   LIVEKIT_URL: ${LIVEKIT_URL}
@@ -21,7 +24,7 @@ services:
     depends_on:
       - backend
     environment:
-      <<: *environment
+      <<: [*agent-environment, *livekit-environment]
 
   backend:
     container_name: chi-jarvis-backend
@@ -48,6 +51,4 @@ services:
       - backend
     command: ["dev"]
     environment:
-      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
-      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
-      LIVEKIT_URL: ${LIVEKIT_URL}
+      <<: *livekit-environment
