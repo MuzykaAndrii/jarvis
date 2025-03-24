@@ -17,11 +17,11 @@ from app import prompts
 logger = logging.getLogger("voice-agent")
 
 
-def prewarm(proc: JobProcess):
+def prewarm(proc: JobProcess) -> None:
     proc.userdata["vad"] = silero.VAD.load()
 
 
-async def entrypoint(ctx: JobContext):
+async def entrypoint(ctx: JobContext) -> None:
     logger.info(f"connecting to room {ctx.room.name}")
     await ctx.connect(auto_subscribe=AutoSubscribe.AUDIO_ONLY)
 
