@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from flask import Blueprint, Response, jsonify, request
 from pydantic import ValidationError
 
@@ -12,13 +14,15 @@ def validate_llm_output() -> Response:
     try:
         data = request.get_json()
         if not data:
-            return jsonify({"error": "Empty JSON request"}), 400
+            return jsonify({"error": "Empty JSON request"}), HTTPStatus.BAD_REQUEST
 
         llm_output = LLMOutputSchema.model_validate(data)
         text = validate_expected_audio_length(llm_output.text)
 
         return jsonify(llm_output.model_dump() | {"text": text})
     except ValidationError as e:
-        return jsonify({"error": "Invalid input", "details": e.errors()}), 400
+        return jsonify(
+            {"error": "Invalid input", "details": e.errors()}
+        ), HTTPStatus.BAD_REQUEST
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), HTTPStatus.INTERNAL_SERVER_ERROR

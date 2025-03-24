@@ -4,6 +4,7 @@ from app.audio.config import MAX_DURATION_SECONDS, WORDS_PER_MIN
 
 
 logger = logging.getLogger(__name__)
+ELLIPSIS_TRESHOLD = 3
 
 
 def validate_expected_audio_length(text: str) -> str:
@@ -30,7 +31,7 @@ def validate_expected_audio_length(text: str) -> str:
     if estimated_duration > MAX_DURATION_SECONDS:
         truncated_text = " ".join(words[:max_words])
 
-        if max_words > 3:
+        if max_words > ELLIPSIS_TRESHOLD:
             truncated_text = truncated_text.rstrip(".!?,;") + "..."
 
         logger.info(
