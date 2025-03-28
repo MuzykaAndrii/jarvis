@@ -1,3 +1,6 @@
+# [Video-recap about application (click here)](https://chiswdevelopment-my.sharepoint.com/:v:/g/personal/andrii_muzyka_chisw_com/EUEjHq9I4eVJqYfCeLyQzecBWJGsnpsEZIZP_XhMb9EIEA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=JeU28d)
+
+
 # Chi-Jarvis
 
 Chi-Jarvis is a voice assistant system built on LiveKit's agent framework with a microservice architecture. It enables natural voice conversations through an AI-powered pipeline that handles voice detection, speech-to-text conversion, language processing, and text-to-speech generation.

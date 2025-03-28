@@ -31,7 +31,7 @@ async def entrypoint(ctx: JobContext) -> None:
     agent = VoicePipelineAgent(
         vad=ctx.proc.userdata["vad"],
         stt=deepgram.STT(),
-        llm=google.LLM(model="gemini-2.0-pro-exp-02-05"),
+        llm=google.LLM(model="gemini-2.0-flash-lite"),
         tts=cartesia.TTS(),
         min_endpointing_delay=1.5,
         max_endpointing_delay=5.0,
